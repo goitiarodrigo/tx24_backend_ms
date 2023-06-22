@@ -50,7 +50,12 @@ class UserRegisterViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception = True)
             try:
                 user = serializer.validated_data['user']
-                token = AccessToken.for_user(user)
+                payload = {
+                    "user_id": user.id,
+                    "username": user.username,
+                    "exp": datetime.utcnow() + timedelta(days=2)
+                }
+                token = jwt.encode(payload, secret_key, algorithm="HS256")
                 response_data = {
                     'access_token': str(token),
                     'user': {
