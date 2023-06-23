@@ -22,7 +22,7 @@ class UserLoginViewSet(viewsets.ModelViewSet):
             payload = {
                 "user_id": user.id,
                 "username": user.username,
-                "exp": datetime.utcnow() + timedelta(days=20)
+                "exp": datetime.utcnow() + timedelta(days=2)
             }
             token = jwt.encode(payload, secret_key, algorithm="HS256")
             response_data = {
