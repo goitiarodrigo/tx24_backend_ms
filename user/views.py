@@ -57,7 +57,7 @@ class UserRegisterViewSet(viewsets.ModelViewSet):
                 }
                 token = jwt.encode(payload, secret_key, algorithm="HS256")
                 response_data = {
-                    'access_token': str(token),
+                    'access_token': token,
                     'user': {
                             'email': user.email,
                             'username': user.username,
